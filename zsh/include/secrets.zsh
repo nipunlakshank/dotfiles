@@ -1,0 +1,5 @@
+# SSH
+export IP_ANTIX=192.168.8.100
+export USER_TERMUX=u0_a288
+export IP_TERMUX=192.168.8.180
+

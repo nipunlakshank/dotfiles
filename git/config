@@ -1,0 +1,57 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Nipun Lakshan
+	email = nipunlakshankumara@gmail.com
+	signingkey = 58FE18A28B8F9AB3
+
+[init]
+	defaultBranch = main
+
+[core]
+    editor = vim
+    pager = less -F -X
+
+[color]
+    ui = always
+    branch = always
+    diff = always
+    interactive = always
+    status = always
+    grep = always
+    decorate = always
+    showbranch = always
+    pager = true
+
+[commit]
+    gpgSign = true
+
+[merge]
+    tool = vimdiff
+
+[mergetool]
+    backup = false
+
+[mergetool "vimdiff"]
+    cmd = nvim -f -c "Gvdiffsplit! \"$MERGED\""
+
+[diff]
+    tool = vimdiff
+
+[difftool "vimdiff"]
+    cmd = nvim -f -c "Gvdiffsplit! \"$MERGED\""
+
+[format]
+    # pretty = %C(auto)%h %s %C(green)(%an, %ar)%C(reset)
+    pretty = format:%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(7)%aN%Cred%d %Creset%s
+
+[alias]
+    st = status
+    co = checkout
+    ci = commit
+    br = branch
+    df = diff
+    l = log --graph --relative-date --abbrev-commit -10
+    la = log --graph --relative-date --abbrev-commit -10 --all
+    ll = log --graph --relative-date --abbrev-commit
+    lla = log --graph --relative-date --abbrev-commit --all
+    ls = ls-tree --name-only -r HEAD

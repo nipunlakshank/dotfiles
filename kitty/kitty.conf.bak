@@ -1,0 +1,222 @@
+# custom keymaps
+map shift+enter send_text all \x1b[13;2u
+map ctrl+enter send_text all \x1b[13;5u
+map ctrl+backspace send_text all \x1b[127;5u
+map cmd+, launch --type=tab --tab-title="kitty config" vim ~/.config/kitty/kitty.conf
+
+# vim:fileencoding=utf-8:foldmethod=marker
+
+font_family      Jetbrains Mono
+# bold_font        auto
+italic_font      Jetbrains Mono Italic
+# bold_italic_font auto
+
+font_size 14
+
+
+###########################################################
+# Symbols Nerd Font complete symbol_map
+# easily troubleshoot missing/incorrect characters with:
+#   kitty --debug-font-fallback
+###########################################################
+
+# "Nerd Fonts - Pomicons"
+symbol_map  U+E000-U+E00D Symbols Nerd Font
+
+# "Nerd Fonts - Powerline"
+symbol_map U+e0a0-U+e0a2,U+e0b0-U+e0b3 Symbols Nerd Font
+
+# "Nerd Fonts - Powerline Extra"
+symbol_map U+e0a3-U+e0a3,U+e0b4-U+e0c8,U+e0cc-U+e0d2,U+e0d4-U+e0d4 Symbols Nerd Font
+
+# "Nerd Fonts - Symbols original"
+symbol_map U+e5fa-U+e62b Symbols Nerd Font
+
+# "Nerd Fonts - Devicons"
+symbol_map U+e700-U+e7c5 Symbols Nerd Font
+
+# "Nerd Fonts - Font awesome"
+symbol_map U+f000-U+f2e0 Symbols Nerd Font
+
+# "Nerd Fonts - Font awesome extension"
+symbol_map U+e200-U+e2a9 Symbols Nerd Font
+
+# "Nerd Fonts - Octicons"
+symbol_map U+f400-U+f4a8,U+2665-U+2665,U+26A1-U+26A1,U+f27c-U+f27c Symbols Nerd Font
+
+# "Nerd Fonts - Font Linux"
+symbol_map U+F300-U+F313 Symbols Nerd Font
+
+#  Nerd Fonts - Font Power Symbols"
+symbol_map U+23fb-U+23fe,U+2b58-U+2b58 Symbols Nerd Font
+
+# "Nerd Fonts - Weather Icons"
+symbol_map U+e300-U+e3eb Symbols Nerd Font
+
+# Braile symbols
+# symbol_map U+2800-U+28FF Symbols Nerd Font
+
+# WARN: some icons not working for below unicodes with Symbols Nerd Font
+
+#  "Nerd Fonts - Material Design Icons"
+# symbol_map U+f500-U+fd46 Symbols Nerd Font
+#
+# Misc Code Point Fixes
+# symbol_map U+21B5,U+25B8,U+2605,U+2630,U+2632,U+2714,U+E0A3,U+E615,U+E62B Symbols Nerd Font
+
+#: Window layout {{{
+
+remember_window_size  yes
+initial_window_width  1200
+initial_window_height 860
+draw_minimal_borders yes
+window_padding_width 2
+placement_strategy center
+hide_window_decorations titlebar-only
+confirm_os_window_close 0
+
+#: }}}
+
+#: Tab bar {{{
+
+tab_bar_style fade
+
+#: }}}
+
+#: Color scheme {{{
+
+# foreground #dddddd
+# background #000000
+
+background_opacity 0.7
+
+background_blur 30
+
+#: The color table {{{
+
+#: The 256 terminal colors. There are 8 basic colors, each color has a
+#: dull and bright version, for the first 16 colors. You can set the
+#: remaining 240 colors as color16 to color255.
+
+# color0 #000000
+# color8 #767676
+
+#: black
+
+# color1 #cc0403
+# color9 #f2201f
+
+#: red
+
+# color2  #19cb00
+# color10 #23fd00
+
+#: green
+
+# color3  #cecb00
+# color11 #fffd00
+
+#: yellow
+
+# color4  #0d73cc
+# color12 #1a8fff
+
+#: blue
+
+# color5  #cb1ed1
+# color13 #fd28ff
+
+#: magenta
+
+# color6  #0dcdcd
+# color14 #14ffff
+
+#: cyan
+
+# color7  #dddddd
+# color15 #ffffff
+
+#: white
+
+# mark1_foreground black
+
+#: Color for marks of type 1
+
+# mark1_background #98d3cb
+
+#: Color for marks of type 1 (light steel blue)
+
+# mark2_foreground black
+
+#: Color for marks of type 2
+
+# mark2_background #f2dcd3
+
+#: Color for marks of type 1 (beige)
+
+# mark3_foreground black
+
+#: Color for marks of type 3
+
+# mark3_background #f274bc
+
+#: Color for marks of type 3 (violet)
+
+#: }}}
+
+#: }}}
+
+#: Advanced {{{
+
+# menu_map
+
+#: Specify entries for various menus in kitty. Currently only the
+#: global menubar on macOS is supported. For example::
+
+#:    menu_map global "Actions::Launch something special" launch --hold --type=os-window sh -c "echo hello world"
+
+#: This will create a menu entry named "Launch something special" in
+#: an "Actions" menu in the macOS global menubar. Sub-menus can be
+#: created by adding more levels separated by the :: characters.
+
+#: }}}
+
+#: OS specific tweaks {{{
+
+# macos_option_as_alt no
+
+#: Use the Option key as an Alt key on macOS. With this set to no,
+#: kitty will use the macOS native Option+Key to enter Unicode
+#: character behavior. This will break any Alt+Key keyboard shortcuts
+#: in your terminal programs, but you can use the macOS Unicode input
+#: technique. You can use the values: left, right or both to use only
+#: the left, right or both Option keys as Alt, instead. Note that
+#: kitty itself always treats Option the same as Alt. This means you
+#: cannot use this option to configure different kitty shortcuts for
+#: Option+Key vs. Alt+Key. Also, any kitty shortcuts using
+#: Option/Alt+Key will take priority, so that any such key presses
+#: will not be passed to terminal programs running inside kitty.
+#: Changing this option by reloading the config is not supported.
+
+macos_colorspace displayp3
+
+#: The colorspace in which to interpret terminal colors. The default
+#: of srgb will cause colors to match those seen in web browsers. The
+#: value of default will use whatever the native colorspace of the
+#: display is. The value of displayp3 will use Apple's special
+#: snowflake display P3 color space, which will result in over
+#: saturated (brighter) colors with some color shift. Reloading
+#: configuration will change this value only for newly created OS
+#: windows.
+
+#: }}}
+
+#: Keyboard shortcuts {{{
+
+#: Reload kitty.conf
+
+# map kitty_mod+f5 load_config_file
+map ctrl+cmd+,   load_config_file
+
+
+#: }}}
