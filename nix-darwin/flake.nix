@@ -28,47 +28,52 @@
           # List packages installed in system profile. To search by name, run:
           # $ nix-env -qaP | grep wget
           environment.systemPackages = with pkgs; [
+            wget
             tmux
             pam-reattach
             oh-my-zsh
             fzf
             neovim
             vim
-            # stow
+            stow
             mkalias
             nil
             nixfmt-rfc-style
-            # lolcat
-            # mycli
-            # ripgrep
-            # fd
-            # colorls
-            # zoxide
+            lolcat
+            mycli
+            ripgrep
+            fd
+            colorls
+            zoxide
+            btop
           ];
 
           homebrew = {
             enable = true;
 
             casks = [
-              # "kitty"
-              # "google-chrome"
+              "kitty"
+              "google-chrome"
               "keka"
-              # "jetbrains-toolbox"
+              "jetbrains-toolbox"
+              "obs"
+              "discord"
+              "vlc"
+              "handbrake"
               # "tailscale"
             ];
 
             brews = [
               "mas"
               "imagemagick"
-              # "starship"
-              # "httpd"
-              # "php"
-              # "mysql"
-              # "btop"
+              "starship"
+              "httpd"
+              "php"
+              "mysql"
             ];
 
             masApps = {
-              # "Pages" = 409201541;
+              "Pages" = 409201541;
             };
 
             # onActivation.cleanup = "zap";
