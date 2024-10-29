@@ -52,8 +52,8 @@ export ANDROID_EMULATOR_HOME=$ANDROID_USER_HOME
 export ANDROID_AVD_HOME=$ANDROID_USER_HOME/avd
 export GRADLE_USER_HOME=$XDG_DATA_HOME/gradle
 
-
 # Set PATH
+PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 PATH=$PATH:$XDG_BIN_HOME
 PATH=$PATH:$XAMPP_HOME/bin
 PATH=$PATH:$ANDROID_HOME/emulator
@@ -63,8 +63,11 @@ PATH=$PATH:$HOME/.composer/vendor/bin
 PATH=$PATH:/Applications/IntelliJ\ IDEA.app/Contents/MacOS
 PATH=$PATH:/Applications/Barrier.app/Contents/MacOS
 PATH=$PATH:$HOME/.docker/bin
-PATH=$PATH:"/Users/nipun/Library/Application Support/Herd/bin"
-PATH="$PATH:/Users/nipun/Library/Application Support/JetBrains/Toolbox/scripts"  # Added by Toolbox App
+PATH="$PATH:/Users/nipun/Library/Application Support/Herd/bin"
+PATH="$PATH:/Users/nipun/Library/Application Support/JetBrains/Toolbox/scripts" # Added by Toolbox App
+PATH="$PATH:/opt/homebrew/lib/ruby/gems/3.3.0/bin"
 
+# Add any additional environment variables here
+# export PATH=$PATH:$(dirname "$(find /nix/store -name home-manager -type f | grep bin)")
 
 export PATH

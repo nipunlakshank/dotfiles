@@ -2,7 +2,7 @@
 [user]
 	name = Nipun Lakshan
 	email = nipunlakshankumara@gmail.com
-	signingkey = 58FE18A28B8F9AB3
+	signingkey = C812E85A073247C5
 
 [init]
 	defaultBranch = main

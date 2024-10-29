@@ -35,7 +35,6 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
 
-    pkgs.oh-my-zsh
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -44,8 +43,8 @@
     ".config/zsh".source = ~/dotfiles/zsh;
     ".config/kitty".source = ~/dotfiles/kitty;
     ".config/starship".source = ~/dotfiles/starship;
-    ".config/nvim".source = ~/dotfiles/nvim;
-    ".vim".source = ~/dotfiles/vim;
+    # ".config/nvim".source = ~/dotfiles/nvim;
+    # ".vim".source = ~/dotfiles/vim;
     ".config/nix".source = ~/dotfiles/nix;
     ".config/nix-darwin".source = ~/dotfiles/nix-darwin;
     ".config/tmux".source = ~/dotfiles/tmux;
@@ -82,29 +81,29 @@
     "$HOME/.nix-profile/bin"
   ];
 
-  programs.zsh = {
-    enable = true;
-    dotDir = ".config/zsh";
-    initExtra = ''
-      # Add any additional configurations here
-      export PATH=/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH
-      if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-        . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-      fi
-    '';
-    envExtra = ''
-      # Add any additional environment variables here
-      export PATH=$PATH:"$(dirname $(find /nix/store -name home-manager -type f | grep bin))"
-    '';
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "git"
-        "zsh-autosuggestions"
-        "zsh-syntax-highlighting"
-      ];
-    };
-  };
+  # programs.zsh = {
+  #   enable = true;
+  #   dotDir = ".config/zsh";
+  #   initExtra = ''
+  #     # Add any additional configurations here
+  #     export PATH=/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH
+  #     if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  #       . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+  #     fi
+  #   '';
+  #   envExtra = ''
+  #     # Add any additional environment variables here
+  #     export PATH=$PATH:"$(dirname $(find /nix/store -name home-manager -type f | grep bin))"
+  #   '';
+  #
+  #   oh-my-zsh = {
+  #     enable = true;
+  #     plugins = [
+  #       "git"
+  #       "zsh-autosuggestions"
+  #       "zsh-syntax-highlighting"
+  #     ];
+  #   };
+  # };
 
 }

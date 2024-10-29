@@ -29,21 +29,15 @@
           # $ nix-env -qaP | grep wget
           environment.systemPackages = with pkgs; [
             wget
-            tmux
             pam-reattach
-            oh-my-zsh
             fzf
-            neovim
-            vim
             stow
             mkalias
             nil
             nixfmt-rfc-style
             lolcat
-            mycli
             ripgrep
             fd
-            colorls
             zoxide
             btop
           ];
@@ -56,10 +50,13 @@
               "google-chrome"
               "keka"
               "jetbrains-toolbox"
+              "font-jetbrains-mono"
+              "zulu"
               "obs"
               "discord"
               "vlc"
               "handbrake"
+              "rectangle"
               # "tailscale"
             ];
 
@@ -70,6 +67,10 @@
               "httpd"
               "php"
               "mysql"
+              "neovim"
+              "vim"
+              "tmux"
+              "mycli"
             ];
 
             masApps = {
@@ -186,7 +187,7 @@
             loginwindow.GuestEnabled = false;
 
             NSGlobalDomain.AppleICUForce24HourTime = true;
-            # NSGlobalDomain.KeyRepeat = 2;
+            NSGlobalDomain.KeyRepeat = 2;
           };
 
           # Auto upgrade nix package and the daemon service.

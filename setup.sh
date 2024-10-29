@@ -20,9 +20,9 @@ fi
 printf "\n\33[92mStep 3 --> Installing nix-darwin... \33[0m\n"
 if command -v darwin-rebuild &> /dev/null; then
     echo "nix-darwin is already installed. Rebuilding flake for configuration: ${config}..."
-    darwin-rebuild switch --flake ~/dotfiles/nix-darwin#${config}
+    darwin-rebuild --extra-experimental-features "nix-command flakes" switch --flake ~/dotfiles/nix-darwin#${config} --impure 
 else
     echo "Building nix-darwin flake for configuration: ${config}..."
-    /nix/var/nix/profiles/default/bin/nix run nix-darwin -- switch --flake ~/dotfiles/nix-darwin#${config}
+    /nix/var/nix/profiles/default/bin/nix run nix-darwin --extra-experimental-features "nix-command flakes" -- switch --flake ~/dotfiles/nix-darwin#${config} --impure 
 fi
 
