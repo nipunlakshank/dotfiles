@@ -71,6 +71,7 @@
               "vim"
               "tmux"
               "mycli"
+              "pinentry-mac"
             ];
 
             masApps = {
