@@ -276,7 +276,7 @@ function nvtestdir() {
 	nvim --headless -c "set rtp=+./" -c "lua require('plenary')" -c "PlenaryBustedDirectory $dir"
 }
 
-function dots(){
+function lh(){
     if [ $# -eq 0 ]; then
         ls -lAh | grep \\s\\.
     else
