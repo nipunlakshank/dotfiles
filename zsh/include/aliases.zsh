@@ -53,7 +53,7 @@ alias kittyconfig='${EDITOR} ${DOTFILES}/kitty/kitty.conf'
 # General aliases
 alias drb='darwin-rebuild switch --flake ~/dotfiles/nix-darwin#air --impure'
 alias refresh='reload'
-alias dotfiles='cd ~/dotfiles && lsa'
+alias dots='cd ~/dotfiles && lsa'
 alias zdot='cd ${DOTFILES}/zsh && lsa'
 alias dotrepo='/usr/bin/git --git-dir=${HOME}/.dotfiles --work-tree=${HOME}'
 alias pmathemes='cd /opt/homebrew/Cellar/phpmyadmin/5.2.1/share/phpmyadmin/themes'
