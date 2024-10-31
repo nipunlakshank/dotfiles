@@ -14,11 +14,14 @@ export XDG_RUNTIME_DIR=/var/run
 # fi
 
 # General
-export HOMEBREW_NO_ANALYTICS=1
 export EDITOR='nvim'
 export LESS="-SRXF"
 export PS_FORMAT="\nID\t{{.ID}}\nNAME\t{{.Names}}\nImage\t{{.Image}}\nPORTS\t{{.Ports}}\nCOMMAND\t{{.Command}}\nCREATED\t{{.CreatedAt}}\nSTATUS\t{{.Status}}\n"
 export DOTFILES=${HOME}/dotfiles
+
+# Homebrew
+export HOMEBREW_NO_ANALYTICS=1
+# export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 
 # zsh
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"

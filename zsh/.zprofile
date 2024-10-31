@@ -278,9 +278,9 @@ function nvtestdir() {
 
 function lh(){
     if [ $# -eq 0 ]; then
-        ls -lAh | grep \\s\\.
+        ls -lAh --color | grep \\s\\.
     else
-        ls -lAh "$1" | grep \\s\\.
+        ls -lAh --color "$1" | grep \\s\\.
     fi
 }
 
