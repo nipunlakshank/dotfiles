@@ -6,10 +6,10 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # home-manager = {
+    #   url = "github:nix-community/home-manager";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs =
@@ -17,7 +17,7 @@
       self,
       nix-darwin,
       nixpkgs,
-      home-manager,
+    # home-manager,
     }:
     let
       macConfiguration =
@@ -48,6 +48,7 @@
             casks = [
               "kitty"
               "google-chrome"
+              "google-drive"
               "keka"
               "jetbrains-toolbox"
               "font-jetbrains-mono"
@@ -57,6 +58,7 @@
               "vlc"
               "handbrake"
               "rectangle"
+              "anydesk"
               # "tailscale"
             ];
 
@@ -69,13 +71,19 @@
               "mysql"
               "neovim"
               "vim"
-              "tmux"
               "mycli"
               "pinentry-mac"
+              "zsh-autosuggestions"
+              "zsh-syntax-highlighting"
+              "zsh-autocd"
+              "zsh"
+              "tmux"
+              "smartmontools"
             ];
 
             masApps = {
               "Pages" = 409201541;
+              "WhatsApp Messenger" = 310633997;
             };
 
             # onActivation.cleanup = "zap";
@@ -132,11 +140,11 @@
           };
 
           # Home Manager configuration.
-          users.users.nipun = {
-            name = "nipun";
-            home = "/Users/nipun";
-          };
-          home-manager.backupFileExtension = "backup";
+          # users.users.nipun = {
+          #   name = "nipun";
+          #   home = "/Users/nipun";
+          # };
+          # home-manager.backupFileExtension = "backup";
           nix.configureBuildUsers = true;
           nix.useDaemon = true;
 
@@ -219,12 +227,12 @@
       darwinConfigurations."air" = nix-darwin.lib.darwinSystem {
         modules = [
           macConfiguration
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.nipun = import ./home.nix;
-          }
+          # home-manager.darwinModules.home-manager
+          # {
+          #   home-manager.useGlobalPkgs = true;
+          #   home-manager.useUserPackages = true;
+          #   home-manager.users.nipun = import ./home.nix;
+          # }
         ];
       };
 

@@ -34,8 +34,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-
-  ];
+];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -45,8 +44,7 @@
     ".config/starship".source = ~/dotfiles/starship;
     # ".config/nvim".source = ~/dotfiles/nvim;
     # ".vim".source = ~/dotfiles/vim;
-    ".config/nix".source = ~/dotfiles/nix;
-    ".config/nix-darwin".source = ~/dotfiles/nix-darwin;
+    ".config/nix/nix.conf".source = ~/dotfiles/nix/nix.conf;
     ".config/tmux".source = ~/dotfiles/tmux;
     ".config/mycli".source = ~/dotfiles/mycli;
     ".config/git".source = ~/dotfiles/git;
@@ -81,29 +79,23 @@
     "$HOME/.nix-profile/bin"
   ];
 
-  # programs.zsh = {
-  #   enable = true;
-  #   dotDir = ".config/zsh";
-  #   initExtra = ''
-  #     # Add any additional configurations here
-  #     export PATH=/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH
-  #     if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  #       . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-  #     fi
-  #   '';
-  #   envExtra = ''
-  #     # Add any additional environment variables here
-  #     export PATH=$PATH:"$(dirname $(find /nix/store -name home-manager -type f | grep bin))"
-  #   '';
-  #
-  #   oh-my-zsh = {
-  #     enable = true;
-  #     plugins = [
-  #       "git"
-  #       "zsh-autosuggestions"
-  #       "zsh-syntax-highlighting"
-  #     ];
-  #   };
-  # };
+  programs.zsh = {
+    enable = true;
+    enableCompletion = false;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    dotDir = ".config/zsh";
+    initExtra = ''
+      # add any additional configurations here
+      export path=/run/current-system/sw/bin:$home/.nix-profile/bin:$path
+      if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+        . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+      fi
+    '';
+    # envExtra = ''
+    #   # Add any additional environment variables here
+    #   export PATH=$PATH:"$(dirname $(find /nix/store -name home-manager -type f | grep bin))"
+    # '';
+  };
 
 }
