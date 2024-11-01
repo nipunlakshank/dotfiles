@@ -1,5 +1,16 @@
-# enable vim motions in shell
-bindkey -v
+setopt autocd
+
+# Homebrew
+export HOMEBREW_NO_ANALYTICS=1
+# export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
+#
+# # zsh
+export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
+export ZINCLUDE="${ZDOTDIR}/include"
+export HISTFILE="${ZDOTDIR}/.zsh_history"
+export HISTSIZE=100000
+export SAVEHIST=50000
+#
 
 # include custom configurations
 for config_file ("$ZINCLUDE"/*.zsh(N)); do
@@ -12,8 +23,7 @@ TERM_NAME="$(env | grep 'TERM_PROGRAM=' | awk -F'=' '{ print $2 }')"
 if [ "$TERM_NAME" != "Apple_Terminal" ]; then
     type starship_zle-keymap-select >/dev/null || \
         {
-            echo "Load starship"
-            eval "$(/usr/local/bin/starship init zsh)"
+            eval "$(starship init zsh)"
         }
 fi
 
@@ -42,11 +52,22 @@ export HERD_PHP_83_INI_SCAN_DIR="${HOME}/Library/Application Support/Herd/config
 eval "$(zoxide init zsh)"
 
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+if [[ -n "$terminfo[kcuu1]" ]]; then
+  bindkey -M emacs "$terminfo[kcuu1]" history-substring-search-up
+  bindkey -M viins "$terminfo[kcuu1]" history-substring-search-up
+fi
+if [[ -n "$terminfo[kcud1]" ]]; then
+  bindkey -M emacs "$terminfo[kcud1]" history-substring-search-down
+  bindkey -M viins "$terminfo[kcud1]" history-substring-search-down
+fi
 
 # home-manager
-# source /etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh
-source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
+[[ -f "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh" ]] && source /etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh
+[[ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]] && source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
 
 # Welcome message (keep this at bottom)
 function welcome() {
@@ -54,4 +75,12 @@ function welcome() {
     neofetch | lolcat
 }
 
-# welcome
+# enable vim motions in shell
+bindkey -v
+
+# autoload -U up-line-or-beginning-search
+# autoload -U down-line-or-beginning-search
+# zle -N up-line-or-beginning-search
+# zle -N down-line-or-beginning-search
+# bindkey "^[[A" up-line-or-beginning-search # Up
+# bindkey "^[[B" down-line-or-beginning-search # Down
