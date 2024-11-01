@@ -256,13 +256,13 @@ function topsizes() {
 }
 
 function jdks() {
-	versions=$(/usr/libexec/java_home -V)
+    versions=$(/usr/libexec/java_home -V)
 
-	# echo $versions
+    # echo $versions
 }
 
 function nvtestdir() {
-	local dir='.'
+    local dir='.'
 
     if [ $# -gt 0 ]; then
         dir="$1"
@@ -273,10 +273,10 @@ function nvtestdir() {
         return 1
     fi
 
-	nvim --headless -c "set rtp=+./" -c "lua require('plenary')" -c "PlenaryBustedDirectory $dir"
+    nvim --headless -c "set rtp=+./" -c "lua require('plenary')" -c "PlenaryBustedDirectory $dir"
 }
 
-function lh(){
+function lh() {
     if [ $# -eq 0 ]; then
         ls -lAh --color | grep \\s\\.
     else
@@ -284,7 +284,7 @@ function lh(){
     fi
 }
 
-function mvn-create(){
+function mvn-create() {
     if [ $# -eq 0 ]; then
         echo "No project name given"
         return 1
@@ -293,3 +293,12 @@ function mvn-create(){
     fi
 }
 
+# home-manager switch
+function hms() {
+    if ! command -v home-manager &>/dev/null; then
+        local HOME_MANAGER_PATH=$(dirname "$(find /nix/store -name home-manager -type f | grep bin)")
+        export PATH=$PATH:"${HOME_MANAGER_PATH}"
+    fi
+
+    hrb
+}
