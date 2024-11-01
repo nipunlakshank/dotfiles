@@ -28,6 +28,7 @@ alias db-connect='mycli -u root'
 
 # Edit files
 alias aliases='${EDITOR} ${DOTFILES}/zsh/include/aliases.zsh'
+alias secrets='${EDITOR} ${DOTFILES}/zsh/include/secrets.zsh'
 alias flake='${EDITOR} ${DOTFILES}/nix/darwin/flake.nix'
 alias home='${EDITOR} ${DOTFILES}/nix/darwin/home.nix'
 alias customvar='${EDITOR} ${XDG_DATA_HOME}/oh-my-zsh/custom/customvar.zsh'
@@ -54,7 +55,7 @@ alias promptconfig='${EDITOR} ${DOTFILES}/starship/starship.toml'
 
 # General aliases
 alias drb='darwin-rebuild switch --flake ~/dotfiles/nix/darwin#air --impure'
-alias hrb='home-manager switch -f ~/dotfiles/nix/darwin/home.nix --extra-experimental-features flakes'
+alias hrb='home-manager switch --extra-experimental-features flakes -f ~/dotfiles/nix/darwin/home.nix'
 alias refresh='reload'
 alias dots='mkdir -p ~/dotfiles && cd "$_" && lsa'
 alias zdot='cd ${DOTFILES}/zsh && lsa'
