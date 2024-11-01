@@ -42,8 +42,9 @@
     ".config/zsh".source = ~/dotfiles/zsh;
     ".config/kitty".source = ~/dotfiles/kitty;
     ".config/starship".source = ~/dotfiles/starship;
+    ".config/neofetch".source = ~/dotfiles/neofetch;
     # ".config/nvim".source = ~/dotfiles/nvim;
-    # ".vim".source = ~/dotfiles/vim;
+    ".config/vim".source = ~/dotfiles/vim;
     ".config/nix/nix.conf".source = ~/dotfiles/nix/nix.conf;
     ".config/tmux".source = ~/dotfiles/tmux;
     ".config/mycli".source = ~/dotfiles/mycli;
@@ -82,8 +83,6 @@
   programs.zsh = {
     enable = true;
     enableCompletion = false;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
     dotDir = ".config/zsh";
     initExtra = ''
       # add any additional configurations here
