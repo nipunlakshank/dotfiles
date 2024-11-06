@@ -15,7 +15,6 @@ function reload() {
     print "\33[3m\33[93mReloading shell configuration...\33[0m"
     source "$ZDOTDIR/.zprofile"
     source "$ZDOTDIR/.zshrc"
-    source "$ZDOTDIR/include/aliases.zsh"
     end=$(date +%s)
     print "\33[92mDone. (took $(("$end" - "$start")) seconds)\33[0m"
 }

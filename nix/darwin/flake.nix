@@ -61,15 +61,12 @@
               "anydesk"
               "zoom"
               "mysqlworkbench"
+              "tableplus"
               # "tailscale"
             ];
 
             brews = [
               "zsh"
-              "zsh-autosuggestions"
-              "zsh-autocomplete"
-              "zsh-syntax-highlighting"
-              "zsh-history-substring-search"
               "rust"
               "mas"
               "imagemagick"
@@ -83,6 +80,10 @@
               "pinentry-mac"
               "tmux"
               "smartmontools"
+              # "zsh-autosuggestions"
+              # "zsh-syntax-highlighting"
+              # "zsh-autocomplete"
+              # "zsh-history-substring-search"
             ];
 
             masApps = {

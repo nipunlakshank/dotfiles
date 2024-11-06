@@ -25,7 +25,7 @@ export NIX_CONF_DIR=${XDG_CONFIG_HOME}/nix
 # Other programs
 export LESSHISTFILE=$XDG_STATE_HOME/less/history
 export MYCLI_HISTFILE=$XDG_DATA_HOME/mycli/history
-export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+export JAVA_HOME="$(/usr/libexec/java_home -v 17)"
 export XAMPP_HOME=/Applications/XAMPP/xamppfiles
 export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml
 export CARGO_HOME=$XDG_DATA_HOME/cargo
