@@ -40,4 +40,4 @@ zsdoc/data
 # End of https://www.toptal.com/developers/gitignore/api/zsh
 
 # custom
-include/secrets.zsh
+after/secrets.zsh
