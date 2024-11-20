@@ -3,7 +3,7 @@
 ## Dependencies
 
 * git
-* [Nix home-manager](https://www.gnu.org/software/stow/)
+* [Nix home-manager](https://github.com/nix-community/home-manager)
 
 ## Setup
 
