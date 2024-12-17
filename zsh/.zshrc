@@ -9,7 +9,7 @@ export ZINCLUDE="${ZDOTDIR}/include"
 export ZAFTER="${ZDOTDIR}/after"
 export HISTFILE="${XDG_STATE_HOME}/zsh/zsh_history"
 export HISTSIZE=100000
-export SAVEHIST=50000
+export SAVEHIST=100000
 
 # include custom configurations
 for config_file in "${ZINCLUDE}"/*.zsh(N); do
@@ -49,11 +49,6 @@ export HERD_PHP_83_INI_SCAN_DIR="${HOME}/Library/Application Support/Herd/config
 # Zoxide
 eval "$(zoxide init zsh)"
 
-# source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source /opt/homebrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-# source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-
 # home-manager
 [[ -f "/etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh" ]] && source /etc/profiles/per-user/$USER/etc/profile.d/hm-session-vars.sh
 [[ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]] && source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
@@ -64,11 +59,9 @@ function welcome() {
     neofetch | lolcat
 }
 
-# enable vim motions in shell
-bindkey -v
-
 # load after configurations
 for config_file in "${ZAFTER}"/*.zsh(N); do
     source "$config_file"
 done
 unset config_file
+
