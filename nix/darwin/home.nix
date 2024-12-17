@@ -49,6 +49,7 @@
     ".config/tmux".source = ~/dotfiles/tmux;
     ".config/mycli".source = ~/dotfiles/mycli;
     ".config/git".source = ~/dotfiles/git;
+    ".config/ideavim".source = ~/dotfiles/ideavim;
   };
 
   # Home Manager can also manage your environment variables through
@@ -82,7 +83,6 @@
 
   programs.zsh = {
     enable = true;
-    enableCompletion = false;
     dotDir = ".config/zsh";
     initExtra = ''
       # add any additional configurations here
@@ -91,10 +91,6 @@
         . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
       fi
     '';
-    # envExtra = ''
-    #   # Add any additional environment variables here
-    #   export PATH=$PATH:"$(dirname $(find /nix/store -name home-manager -type f | grep bin))"
-    # '';
   };
 
 }

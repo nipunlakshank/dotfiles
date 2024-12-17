@@ -63,6 +63,8 @@
               "mysqlworkbench"
               "tableplus"
               # "tailscale"
+              "herd"
+              "transmission"
             ];
 
             brews = [
@@ -80,10 +82,10 @@
               "pinentry-mac"
               "tmux"
               "smartmontools"
-              # "zsh-autosuggestions"
-              # "zsh-syntax-highlighting"
-              # "zsh-autocomplete"
-              # "zsh-history-substring-search"
+              "rsync"
+              "onefetch"
+              "glow"
+              "coreutils"
             ];
 
             masApps = {
@@ -92,8 +94,8 @@
             };
 
             # onActivation.cleanup = "zap";
-            onActivation.autoUpdate = true;
-            onActivation.upgrade = true;
+            onActivation.autoUpdate = false;
+            onActivation.upgrade = false;
           };
 
           fonts.packages = [
@@ -230,6 +232,7 @@
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#simple
       darwinConfigurations."air" = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
         modules = [
           macConfiguration
           home-manager.darwinModules.home-manager
