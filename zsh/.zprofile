@@ -10,13 +10,38 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 # 	java ~/.programs/EnvFormatter.java $PATH
 # }
 
+function duration() {
+    local start_time=$1
+    local end_time=$2
+
+    local diff=$(echo "($end_time - $start_time) * 1000" | bc)
+    local ftime=$(printf "%.3f" $diff)
+    local ftime_int=${ftime%.*}
+
+    if [ $ftime_int -gt 60000 ]; then
+        ftime=$(echo "scale=3; $ftime / 60000" | bc)
+        echo "${ftime} m"
+        return
+    fi
+
+    if [ $ftime_int -gt 1000 ]; then
+        ftime=$(echo "scale=3; $ftime / 1000" | bc)
+        echo "${ftime} s"
+        return
+    fi
+
+    echo "${ftime} ms"
+    return
+}
+
 function reload() {
-    start=$(date +%s)
+    local start=$(date +%s.3%N)
     print "\33[3m\33[93mReloading shell configuration...\33[0m"
     source "$ZDOTDIR/.zprofile"
     source "$ZDOTDIR/.zshrc"
-    end=$(date +%s)
-    print "\33[92mDone. (took $(("$end" - "$start")) seconds)\33[0m"
+    local end=$(date +%s.3%N)
+    local time=$(duration "$start" "$end")
+    print "\33[92mDone. Execution time: ${time}\33[0m"
 }
 
 function ip() {
@@ -71,12 +96,47 @@ function ip_termux() {
 }
 
 function clone() {
-    if [ $# -eq 0 ]; then
-        echo "Repositary name missing!"
+    # Default to SSH
+    method="ssh"
+
+    # Check for flags
+    while getopts "m:" opt; do
+        case "$opt" in
+            m)
+                if [ "$OPTARG" = "https" ]; then
+                    method="https"
+                elif [ "$OPTARG" != "ssh" ]; then
+                    echo "Invalid method! Use -m ssh or -m https."
+                    return 1
+                fi
+                ;;
+            \?)
+                echo "Invalid option: -$OPTARG"
+                return 1
+                ;;
+        esac
+    done
+    shift $((OPTIND - 1))
+
+    # Check if repository name is provided
+    if [ $# -lt 1 ]; then
+        echo "Repository name missing!"
         return 1
     fi
 
-    eval "$(git clone https://github.com/nipunlakshank/"$1".git)"
+    # Set repository name and optional directory name
+    repo_name="$1"
+    directory_name="${2:-$repo_name}"  # Use the provided directory name or default to repo_name if not specified
+
+    # Set the repository URL based on the selected method
+    if [ "$method" = "https" ]; then
+        repo_url="https://github.com/nipunlakshank/$repo_name.git"
+    else
+        repo_url="git@github.com:nipunlakshank/$repo_name.git"
+    fi
+
+    # Clone the repository into the specified directory
+    git clone "$repo_url" "$directory_name"
 }
 
 function lfs_mnt() {
@@ -295,9 +355,9 @@ function mvn-create() {
 # home-manager switch
 function hms() {
     if ! command -v home-manager &>/dev/null; then
-        local HOME_MANAGER_PATH=$(dirname "$(find /nix/store -name home-manager -type f | grep bin)")
+        HOME_MANAGER_PATH=$(dirname "$(find /nix/store -name home-manager -type f | grep bin)")
         export PATH=$PATH:"${HOME_MANAGER_PATH}"
     fi
 
-    hrb
+    "$HOME_MANAGER_PATH"/home-manager switch --extra-experimental-features flakes -f ~/dotfiles/nix/darwin/home.nix
 }

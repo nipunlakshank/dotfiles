@@ -36,7 +36,7 @@ export NVM_DIR="$XDG_DATA_HOME/nvm"
 export GNUPGHOME=${XDG_DATA_HOME}/gnupg
 export GPG_TTY="$(tty)"
 export LG_CONFIG_FILE="${XDG_CONFIG_HOME}/lazygit/config.yml,${XDG_CONFIG_HOME}/lazygit/themes-mergable/mocha/peach.yml"
-# export DYLD_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_LIBRARY_PATH"
+export ARDUINO_CLI_CONFIG_FILE="${XDG_CONFIG_HOME}/arduino-cli/arduino-cli.yaml"
 
 export ANDROID_HOME=$XDG_DATA_HOME/android
 export ANDROID_USER_HOME=$XDG_DATA_HOME/android
@@ -44,8 +44,14 @@ export ANDROID_EMULATOR_HOME=$ANDROID_USER_HOME
 export ANDROID_AVD_HOME=$ANDROID_USER_HOME/avd
 export GRADLE_USER_HOME=$XDG_DATA_HOME/gradle
 
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+    . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
 # Set PATH
 PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 PATH=$PATH:$XDG_BIN_HOME
 PATH=$PATH:$XAMPP_HOME/bin
 PATH=$PATH:$ANDROID_HOME/emulator

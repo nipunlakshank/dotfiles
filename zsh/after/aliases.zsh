@@ -27,15 +27,16 @@ alias db-status='sudo mysql.server status'
 alias db-connect='mycli -u root'
 
 # Edit files
-alias aliases='${EDITOR} ${DOTFILES}/zsh/include/aliases.zsh'
-alias secrets='${EDITOR} ${DOTFILES}/zsh/include/secrets.zsh'
+alias aliasrc='${EDITOR} ${DOTFILES}/zsh/after/aliases.zsh'
+alias secrets='${EDITOR} ${DOTFILES}/zsh/after/secrets.zsh'
 alias flake='${EDITOR} ${DOTFILES}/nix/darwin/flake.nix'
 alias home='${EDITOR} ${DOTFILES}/nix/darwin/home.nix'
 alias customvar='${EDITOR} ${XDG_DATA_HOME}/oh-my-zsh/custom/customvar.zsh'
-alias vimrc='${EDITOR} ${DOTFILES}/vim/.vim/vimrc'
+alias vimrc='${EDITOR} ${DOTFILES}/vim/vimrc'
 alias ideavimrc='${EDITOR} ${XDG_CONFIG_HOME}/ideavim/ideavimrc'
 alias zshenv='${EDITOR} ${DOTFILES}/zsh/.zshenv'
 alias zshrc='${EDITOR} ${DOTFILES}/zsh/.zshrc'
+alias zkeys='${EDITOR} ${DOTFILES}/zsh/after/keys.zsh'
 alias zprofile='${EDITOR} ${DOTFILES}/zsh/.zprofile'
 alias zlogin='${EDITOR} ${DOTFILES}/zsh/.zlogin'
 alias httpdconfig='${EDITOR} /opt/homebrew/etc/httpd'
@@ -54,6 +55,7 @@ alias kittyconfig='${EDITOR} ${DOTFILES}/kitty/kitty.conf'
 alias promptconfig='${EDITOR} ${DOTFILES}/starship/starship.toml'
 
 # General aliases
+# alias date='gdate'
 alias drb='darwin-rebuild switch --flake ~/dotfiles/nix/darwin#air --impure'
 alias hrb='home-manager switch --extra-experimental-features flakes -f ~/dotfiles/nix/darwin/home.nix'
 alias refresh='reload'
@@ -100,3 +102,6 @@ alias tx='tmux kill-server'
 
 alias nvrtp='nvim -c "set rtp+=./"'
 alias nvg='nvim -c "Git" -c "only"'
+
+# git
+alias cbr='git branch --sort=-committerdate | fzf --header "Checkout Recent Branch" --preview "git diff {1} --color=always" --pointer="" | xargs git checkout'
