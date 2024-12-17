@@ -40,7 +40,6 @@ $gcloud\
 $sudo\
 $jobs\
 $cmd_duration\
-$battery\
 $time\
 $status\
 $container\
@@ -50,6 +49,7 @@ $newline
 
 [cmd_duration]
 min_time = 1
+style = "took [$duration](yellow)"
 
 [character]
 format = "$symbol[➜](#06d6a0) "
@@ -118,7 +118,7 @@ conflicted = ' 🏳 '
 up_to_date = '[✓](green ) '
 untracked = '[?](#f18701) '
 stashed = '📦 '
-modified = ' [!](yellow) '
+modified = '[!](yellow) '
 staged = '[++$count](green ) '
 deleted = '[](red) '
 # renamed = '襁 '
