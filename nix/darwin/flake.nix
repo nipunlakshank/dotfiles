@@ -89,6 +89,7 @@
               "coreutils"
               "inetutils"
               "trash-cli"
+              "direnv"
             ];
 
             masApps = {
