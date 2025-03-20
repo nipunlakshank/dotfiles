@@ -1,11 +1,22 @@
-" Get current os (to define os specific configs)
-if !exists("g:os")
-	if  has("win32")
-		let g:os = "Windows"
-    else
-		let g:os = substitute(system('uname'), '\n', '', '')
-	endif
+let config_dir = '~/.config/vim'
+let data_dir = '~/.local/share/vim'
+let state_dir = '~/.local/state/vim'
+
+" runtime path
+set rtp+=$HOME/.local/share/vim//
+set rtp+=$HOME/.local/state/vim//
+
+" Install vim-plug if not found
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+            \| PlugInstall --sync | source $MYVIMRC
+            \| endif
 
 let g:mapleader=' '
 let g:maplocalleader=' '
@@ -17,7 +28,7 @@ syntax on
 " set timeoutlen=250
 set updatetime=100
 set showcmd
-set directory=$HOME/.vim/swapfiles//
+set directory=$HOME/.local/state/vim/swapfiles//
 set noswapfile
 set confirm
 set nu
@@ -26,17 +37,14 @@ set mouse=a
 set scrolloff=10
 set laststatus=2
 set undofile
-set undodir=$HOME/.vim/undo//
+set undodir=$HOME/.local/state/vim/undo//
 set splitbelow
 set splitright
 set expandtab
 
-" runtime path
-" set rtp+=/opt/homebrew/opt/fzf
-
 " Appearance
 set termguicolors
-set fillchars=eob:\•
+set fillchars=eob:\ 
 " set t_Co=256
 
 " Search
@@ -52,22 +60,9 @@ set shiftwidth=4
 set listchars+=lead:\ 
 " ----------- Options end ----------- "
 
-" Install vim-plug if not found
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs
-              \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-" Run PlugInstall if there are missing plugins
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-  \| PlugInstall --sync | source $MYVIMRC
-\| endif
-
 
 " ----------- Plugins start ----------- "
-call plug#begin()
+call plug#begin(data_dir . '/plugged')
 " colorschemes
 Plug 'ayu-theme/ayu-vim'
 Plug 'danilo-augusto/vim-afterglow'
@@ -124,12 +119,12 @@ function! g:committia_hooks.edit_open(info)
 endfunction
 
 function! GitGutterNextHunkCycle()
-  let line = line('.')
-  silent! GitGutterNextHunk
-  if line('.') == line
-    1
-    GitGutterNextHunk
-  endif
+    let line = line('.')
+    silent! GitGutterNextHunk
+    if line('.') == line
+        1
+        GitGutterNextHunk
+    endif
 endfunction
 
 let g:colorscheme="catppuccin_mocha"
@@ -138,7 +133,7 @@ let g:airline_theme='transparent'
 
 let g:indentLine_enabled = 1
 let g:indentLine_setColors = 0
-" let g:indentLine_color_term = 256
+let g:indentLine_color_term = 256
 " let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " let g:indentLine_char_list=['│']
 let g:indentLine_char_list=['▏']
@@ -146,18 +141,18 @@ let g:indentLine_char_list=['▏']
 let g:afterglow_inherit_background=1
 
 let g:PaperColor_Theme_Options = {
-			\   'language': {
-			\     'python': {
-			\       'highlight_builtins' : 1
-			\     },
-			\     'cpp': {
-			\       'highlight_standard_library': 1
-			\     },
-			\     'c': {
-			\       'highlight_builtins' : 1
-			\     }
-			\   }
-			\ }
+            \   'language': {
+            \     'python': {
+            \       'highlight_builtins' : 1
+            \     },
+            \     'cpp': {
+            \       'highlight_standard_library': 1
+            \     },
+            \     'c': {
+            \       'highlight_builtins' : 1
+            \     }
+            \   }
+            \ }
 
 " Lsp settings
 let g:lsp_settings_filetype_zsh = ['bash-language-server']
@@ -190,7 +185,7 @@ function! s:on_lsp_buffer_enabled() abort
 
     let g:lsp_format_sync_timeout = 1000
     autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
-    
+
     " refer to doc to add more commands
 endfunction
 
@@ -202,7 +197,7 @@ augroup END
 
 " ----------- Custom key mappings start ----------- 
 " Reload vimrc
-nnoremap <leader>R :so ~/.vim/vimrc<CR>
+nnoremap <leader>R :so ~/.config/vim/vimrc<CR>
 
 " Find and Replace
 nnoremap <leader>r :%s///g<left><left>
@@ -226,26 +221,27 @@ inoremap <C-CR> <Esc>jA
 inoremap <S-CR> <Esc>oS
 
 " Moving lines
-if g:os == "Darwin"
-	vnoremap ∆ :m '>+1<CR>gv=gv
-	vnoremap ˚ :m '<-2<CR>gv=gv
-	nnoremap ∆ :m .+1<CR>==
-	nnoremap ˚ :m .-2<CR>==
-	inoremap ∆ <Esc>:m .+1<CR>==gi
-	inoremap ˚ <Esc>:m .-2<CR>==gi
+if has('macunix')
+    vnoremap ∆ :m '>+1<CR>gv=gv
+    vnoremap ˚ :m '<-2<CR>gv=gv
+    nnoremap ∆ :m .+1<CR>==
+    nnoremap ˚ :m .-2<CR>==
+    inoremap ∆ <Esc>:m .+1<CR>==gi
+    inoremap ˚ <Esc>:m .-2<CR>==gi
 else
-	vnoremap <A-j> :m '>+1<CR>gv=gv
-	vnoremap <A-k> :m '<-2<CR>gv=gv
-	nnoremap <A-j> :m .+1<CR>==
-	nnoremap <A-k> :m .-2<CR>==
-	inoremap <A-j> <Esc>:m .+1<CR>==gi
-	inoremap <A-k> <Esc>:m .-2<CR>==gi
+    vnoremap <A-j> :m '>+1<CR>gv=gv
+    vnoremap <A-k> :m '<-2<CR>gv=gv
+    nnoremap <A-j> :m .+1<CR>==
+    nnoremap <A-k> :m .-2<CR>==
+    inoremap <A-j> <Esc>:m .+1<CR>==gi
+    inoremap <A-k> <Esc>:m .-2<CR>==gi
 endif
 
 nnoremap <leader>lf :LspDocumentFormat<CR>
 
 " fzf
 nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fr :History<CR>
 nnoremap <leader>fg :Rg<CR>
 nnoremap <leader>fF :GFiles<CR>
 nnoremap <leader>fb :Buffers<CR>
@@ -254,11 +250,11 @@ nnoremap <leader>fh :Helptags<CR>
 " ----------- Custom key mappings end ----------- 
 
 " ----------- Auto commands start ----------- "
-autocmd VimEnter * execute "colorscheme " . g:colorscheme
+autocmd VimEnter * silent! execute "colorscheme " . g:colorscheme
 autocmd VimEnter * hi Normal ctermbg=NONE guibg=NONE
 autocmd VimEnter * hi NonText ctermbg=NONE guibg=NONE
 
-autocmd SourcePost * execute "colorscheme " . g:colorscheme
+autocmd SourcePost * silent! execute "colorscheme " . g:colorscheme
 autocmd SourcePost * hi Normal ctermbg=NONE guibg=NONE
 autocmd SourcePost * hi EndOfBuffer ctermbg=NONE guibg=NONE
 

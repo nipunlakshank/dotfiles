@@ -34,7 +34,7 @@
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-];
+  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -43,8 +43,6 @@
     ".config/kitty".source = ~/dotfiles/kitty;
     ".config/starship".source = ~/dotfiles/starship;
     ".config/neofetch".source = ~/dotfiles/neofetch;
-    # ".config/nvim".source = ~/dotfiles/nvim;
-    ".config/vim".source = ~/dotfiles/vim;
     ".config/nix/nix.conf".source = ~/dotfiles/nix/nix.conf;
     ".config/tmux".source = ~/dotfiles/tmux;
     ".config/mycli".source = ~/dotfiles/mycli;
