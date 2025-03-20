@@ -1,5 +1,6 @@
 # Homebrew
 export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_BUNDLE_FILE=~/dotfiles/homebrew/Brewfile
 # export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
 
 # zsh
@@ -54,7 +55,7 @@ eval "$(zoxide init zsh)"
 [[ -f "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]] && source $HOME/.nix-profile/etc/profile.d/hm-session-vars.sh
 
 # Welcome message (keep this at bottom)
-function welcome() {
+function sysfetch() {
     # cowsay "$(fortune -s)" | lolcat
     neofetch | lolcat
 }

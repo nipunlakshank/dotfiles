@@ -88,7 +88,7 @@ alias nvf='nvim $(fd | fzf --prompt=" Select file or directory  " --height
 alias nvsf='nvs $(fd | fzf --prompt=" Select file or directory  " --height=~80% --layout=reverse --border --exit-0)'
 alias path='line_format ${PATH} :'
 alias oil='nvim -c "Oil"'
-alias mx='ssh_connect --user nipun --file ${XDG_CONFIG_HOME}/ssh_connect/servers/antix.txt'
+alias mx='ssh-connect --user nipun --file ${XDG_CONFIG_HOME}/ssh-connect/servers.conf'
 alias lg='lazygit'
 
 alias ipinfo='curl --silent ipinfo.io | jq'

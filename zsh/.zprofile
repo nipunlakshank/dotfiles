@@ -35,11 +35,11 @@ function duration() {
 }
 
 function reload() {
-    local start=$(date +%s.3%N)
+    local start=$(gdate +%s.3%N)
     print "\33[3m\33[93mReloading shell configuration...\33[0m"
     source "$ZDOTDIR/.zprofile"
     source "$ZDOTDIR/.zshrc"
-    local end=$(date +%s.3%N)
+    local end=$(gdate +%s.3%N)
     local time=$(duration "$start" "$end")
     print "\33[92mDone. Execution time: ${time}\33[0m"
 }
