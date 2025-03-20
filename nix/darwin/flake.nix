@@ -85,7 +85,10 @@
               "rsync"
               "onefetch"
               "glow"
+              "bat"
               "coreutils"
+              "inetutils"
+              "trash-cli"
             ];
 
             masApps = {
@@ -100,13 +103,16 @@
 
           fonts.packages = [
             pkgs.inter
-            (pkgs.nerdfonts.override {
-              fonts = [
-                "JetBrainsMono"
-                "NerdFontsSymbolsOnly"
-              ];
-            })
+            pkgs.nerd-fonts.jetbrains-mono
+            pkgs.nerd-fonts.symbols-only
           ];
+
+          # (pkgs.nerdfonts.override {
+          #   fonts = [
+          #     "JetBrainsMono"
+          #     "NerdFontsSymbolsOnly"
+          #   ];
+          # })
 
           # Convert symlinks to macOS aliases for apps (symlinks won't be indexed by spotlight)
           system.activationScripts.applications.text =
@@ -123,7 +129,7 @@
               rm -rf /Applications/Nix\ Apps
               mkdir -p /Applications/Nix\ Apps
               find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-              while read src; do
+              while read -r src; do
                 app_name=$(basename "$src")
                 echo "copying $src" >&2
                 ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
@@ -135,8 +141,7 @@
           # enable touchId for sudo (this will add pam_tid.so to /etc/pam.d/sudo_local which is not affected by system updates)
           environment = {
             etc."pam.d/sudo_local".text = ''
-              # Managed by Nix Darwin
-              auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so ignore_ssh
+              auth       optional       ${pkgs.pam-reattach}/lib/pam/pam_reattach.so ignore_ssh   # added by nix-darwin
               auth       sufficient     pam_tid.so
             '';
 
@@ -152,8 +157,8 @@
             home = "/Users/nipun";
           };
           home-manager.backupFileExtension = "backup";
-          nix.configureBuildUsers = true;
-          nix.useDaemon = true;
+          # nix.configureBuildUsers = true;
+          # nix.useDaemon = true;
 
           # Set up system settings.
           system.defaults = {
@@ -207,7 +212,7 @@
           };
 
           # Auto upgrade nix package and the daemon service.
-          services.nix-daemon.enable = true;
+          # services.nix-daemon.enable = true;
           # nix.package = pkgs.nix;
 
           # Necessary for using flakes on this system.
