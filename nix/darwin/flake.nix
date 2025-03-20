@@ -209,7 +209,7 @@
             loginwindow.GuestEnabled = false;
 
             NSGlobalDomain.AppleICUForce24HourTime = true;
-            NSGlobalDomain.KeyRepeat = 2;
+            NSGlobalDomain.KeyRepeat = 1;
           };
 
           # Auto upgrade nix package and the daemon service.
